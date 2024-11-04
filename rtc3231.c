@@ -13,7 +13,7 @@
 
 
 #include "rtc3231.h"
-#include "i2c_master.h"
+#include "i2c_avr/i2c_master.h"
 
 /* BITPOSITIONS */
 /* Control register */
@@ -64,7 +64,13 @@ static unsigned char bin(unsigned char dec)
 
 void rtc3231_init(void)
 {
-	i2c_master_start(DS3231_ADDR, I2C_WRITE);
+	uint8_t _state;
+	i2c_master_init(I2C_SCL_FREQUENCY_400);
+	_state = i2c_master_start(DS3231_ADDR, I2C_WRITE);
+	if (_state != I2C_STATUS_SUCCESS)
+	{
+		return;
+	}
 	i2c_master_write(DS3231_CONTROL);
 	i2c_master_write((1<<CONV)); // Convert Temperature
 	i2c_master_write((1<<OSF));
@@ -129,10 +135,25 @@ void rtc3231_write_time(rtc_datetime_t *dt)
 void rtc3231_write_date(rtc_datetime_t *dt)
 {
 	i2c_master_start(DS3231_ADDR, I2C_WRITE);
-	i2c_master_write(DS3231_SECONDS);
+	i2c_master_write(DS3231_DAY);
     i2c_master_write(bin(dt->wday));
     i2c_master_write(bin(dt->day));
-	i2c_master_write(bin(dt->month));
+	i2c_master_write(bin(dt->month) & 0x1F);
 	i2c_master_write(bin(dt->year));
     i2c_master_stop();
+}
+
+void rtc3231_write_datetime(rtc_datetime *dt)
+{
+	i2c_master_start(DS3231_ADDR, I2C_WRITE);
+	i2c_master_write(DS3231_SECONDS);
+	i2c_master_write(bin(dt->sec));
+	i2c_master_write(bin(dt->sec));
+	i2c_master_write(bin(dt->min));
+	i2c_master_write(bin(dt->hour));
+	i2c_master_write(bin(dt->wday));
+	i2c_master_write(bin(dt->day));
+	i2c_master_write(bin(dt->month) & 0x1F);
+	i2c_master_write(bin(dt->year));
+	i2c_master_stop();
 }
