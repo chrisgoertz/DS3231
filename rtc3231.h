@@ -95,6 +95,12 @@ void rtc3231_write_time(rtc_datetime_t *dt);
  */
 void rtc3231_write_date(rtc_datetime_t *dt);
 
+/**
+* Writing new datetime in clock
+* @dt: datetime structure for writing data
+*/
+void rtc3231_write_datetime(rtc_datetime_t *dt);
+
 //TODO add functions:
 //void rtc3231_32khz_output(bool enable);
 //bool rtc3231_isBusy();
