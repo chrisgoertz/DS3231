@@ -16,27 +16,44 @@
 #include <i2c_master.h>
 
 /* BITPOSITIONS */
+
 /* Control register */
+// Alarm 1 Interrupt enable
 #define A1IE					(0x00)
+//Alarm 2 Interrupt enable
 #define A2IE					(0x01)
+// Interrupt Control
 #define INTCN					(0x02)
+// Rate Select 1 Bit
 #define RS1						(0x03)
+// Rate Select 2 Bit
 #define RS2						(0x04)
+// Convert Temperature Bit
 #define CONV					(0x05)
+// Battery-Backed Square-Wave Enable
 #define BBSQW					(0x06)
+// Enable Oscillator (active low)
 #define EOSC					(0x07)
+
 /* Status register */
+// Alarm 1 Interrupt flag
 #define A1F						(0x00)
+// Alarm 2 Interrupt flag
 #define A2F						(0x01)
+// Busy flag
 #define BSY						(0x02)
+// Enable 32kHz Output
 #define EN32KHZ					(0x03)
 #define OSF						(0x07)
 
-
+/* Timekeeping Registers */
 
 /* DS3231 ADDRESS MAP */
+// BCD encoded seconds
 #define	DS3231_SECONDS									(0x00)
+// BCD encoded minutes
 #define	DS3231_MINUTES									(0x01)
+// BCD encoded hours
 #define	DS3231_HOURS									(0x02)
 #define	DS3231_DAY										(0x03)
 #define	DS3231_DATE										(0x04)
@@ -54,8 +71,23 @@
 #define	DS3231_STATUS									(0x10)
 #define	DS3231_AGING_OFFSET								(0x11)
 #define	DS3231_TEMP_MSB									(0x12)
-#define	DS3131_TEMP_LSB									(0x13)
+#define	DS3231_TEMP_LSB									(0x13)
 
+/* Timekeeping Bitpositions */
+// Depending on 12/24h mode. PM if set
+#define DS3231_AM_PM									(0x05)
+// 12h mode if set
+#define DS3231_12_HOUR_MODE								(0x06)
+// Century bit
+#define DS3231_CENTURY									(0x07)
+#define DS3231_A1M1										(0x07)
+#define DS3231_A1M2										(0x07)
+#define DS3231_A1M3										(0x07)
+#define DS3231_A1M4										(0x07)
+#define DS3231_DY_DT									(0x06)
+#define DS3231_A2M2										(0x07)
+#define DS3231_A2M3										(0x07)
+#define DS3231_A2M4										(0x07)
 
 static unsigned char bcd (unsigned char data)
 {

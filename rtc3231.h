@@ -26,6 +26,8 @@
 #define DS3231_ALARM1_ON_H_AND_M_AND_S_MATCH			(0x08)
 #define DS3231_ALARM1_ON_DATE_AND_H_AND_M_AND_S_MATCH	(0x00)
 #define DS3231_ALARM1_ON_DAY_AND_H_AND_M_AND_S_MATCH	(0x10)
+
+
 typedef struct rtc_datetime
 {
 	uint8_t sec;
@@ -36,7 +38,7 @@ typedef struct rtc_datetime
 	uint8_t day;
 	uint8_t month;
 	uint8_t year;
-  uint8_t century;	
+  	uint8_t century;	
 }rtc_datetime_t;
 /*
  * Clock initialization
