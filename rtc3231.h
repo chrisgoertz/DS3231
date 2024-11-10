@@ -83,14 +83,20 @@ void rtc3231_write_date(rtc_datetime_t *dt);
 * @param dt: datetime structure for writing data
 */
 void rtc3231_write_datetime(rtc_datetime_t *dt);
+
 /**
  * Enable/Disable 32kHz Output signal
  * @param enable: bool
  */
 void rtc3231_32khz_output(bool enable);
 
+/**
+ * Read the Busy flag from status register.
+ * @return true if busy
+ */
+bool rtc3231_isBusy();
+
 //TODO add functions:
-//bool rtc3231_isBusy();
 //bool rtc3231_isAlarm1Armed();
 //bool rtc3231_isAlarm2Armed();
 //void rtc3231_armAlarm1(bool enable);

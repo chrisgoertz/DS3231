@@ -220,7 +220,9 @@ void rtc3231_32khz_output(bool enable)
 	i2c_master_write(DS3231_STATUS);
 	i2c_master_stop();
 	i2c_master_start(DS3231_ADDR, I2C_READ);
-	uint8_t _sreg = i2c_master_readAck();
+	uint8_t _sreg = i2c_master_readNack();
+	i2c_master_stop();
+
 	if(enable)
 	{
 		_sreg |= (1 << EN32KHZ);
@@ -233,4 +235,15 @@ void rtc3231_32khz_output(bool enable)
 	i2c_master_write(DS3231_STATUS);
 	i2c_master_write(_sreg);
 	i2c_master_stop();
+}
+
+bool rtc3231_isBusy()
+{
+	i2c_master_start(DS3231_ADDR, I2C_WRITE);
+	i2c_master_write(DS3231_STATUS);
+	i2c_master_stop();
+	i2c_master_start(DS3231_ADDR, I2C_READ);
+	uint8_t _sreg = i2c_master_readNack();
+	i2c_master_stop();
+	return _sreg & (1 << BSY);
 }
