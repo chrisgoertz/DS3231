@@ -13,7 +13,7 @@
 
 
 #include "rtc3231.h"
-#include "../i2c_avr/i2c_master.h"
+#include <i2c_master.h>
 
 /* BITPOSITIONS */
 /* Control register */
