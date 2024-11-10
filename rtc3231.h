@@ -27,7 +27,9 @@
 #define DS3231_ALARM1_ON_DATE_AND_H_AND_M_AND_S_MATCH	(0x00)
 #define DS3231_ALARM1_ON_DAY_AND_H_AND_M_AND_S_MATCH	(0x10)
 
-
+/** Timekeeping structure for use with ds3231
+ * or maybe also other rtcs.
+*/
 typedef struct rtc_datetime
 {
 	uint8_t sec;
@@ -40,6 +42,7 @@ typedef struct rtc_datetime
 	uint8_t year;
   	uint8_t century;	
 }rtc_datetime_t;
+
 /*
  * Clock initialization
  */
@@ -47,42 +50,46 @@ void rtc3231_init(void);
 
 /**
  * Reading only time from clock
- * @dt: datetime structure with reading data
+ * @param dt: datetime structure with reading data
  */
 void rtc3231_read_time(rtc_datetime_t *dt);
 
 /**
  * Reading only date from clock
- * @dt: datetime structure with reading data
+ * @param dt: datetime structure with reading data
  */
 void rtc3231_read_date(rtc_datetime_t *dt);
 
 /**
  * Reading date and time from clock
- * @dt: datetime structure with reading data
+ * @param dt: datetime structure with reading data
  */
 void rtc3231_read_datetime(rtc_datetime_t *dt);
 
 /**
  * Writing new time in clock
- * @dt: datetime structure for writing data
+ * @param dt: datetime structure for writing data
  */
 void rtc3231_write_time(rtc_datetime_t *dt);
 
 /**
  * Writing new date in clock
- * @dt: datetime structure for writing data
+ * @param dt: datetime structure for writing data
  */
 void rtc3231_write_date(rtc_datetime_t *dt);
 
 /**
 * Writing new datetime in clock
-* @dt: datetime structure for writing data
+* @param dt: datetime structure for writing data
 */
 void rtc3231_write_datetime(rtc_datetime_t *dt);
+/**
+ * Enable/Disable 32kHz Output signal
+ * @param enable: bool
+ */
+void rtc3231_32khz_output(bool enable);
 
 //TODO add functions:
-//void rtc3231_32khz_output(bool enable);
 //bool rtc3231_isBusy();
 //bool rtc3231_isAlarm1Armed();
 //bool rtc3231_isAlarm2Armed();

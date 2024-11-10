@@ -213,3 +213,24 @@ void rtc3231_write_datetime(rtc_datetime_t *dt)
 	i2c_master_write(bin(dt->year));
 	i2c_master_stop();
 }
+
+void rtc3231_32khz_output(bool enable)
+{
+	i2c_master_start(DS3231_ADDR, I2C_WRITE);
+	i2c_master_write(DS3231_STATUS);
+	i2c_master_stop();
+	i2c_master_start(DS3231_ADDR, I2C_READ);
+	uint8_t _sreg = i2c_master_readAck();
+	if(enable)
+	{
+		_sreg |= (1 << EN32KHZ);
+	}
+	else
+	{
+		_sreg &= ~(1 << EN32KHZ);
+	}
+	i2c_master_start(DS3231_ADDR, I2C_WRITE);
+	i2c_master_write(DS3231_STATUS);
+	i2c_master_write(_sreg);
+	i2c_master_stop();
+}
