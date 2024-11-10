@@ -36,7 +36,7 @@ typedef struct rtc_datetime
 	uint8_t day;
 	uint8_t month;
 	uint8_t year;
-	
+  uint8_t century;	
 }rtc_datetime_t;
 /*
  * Clock initialization
