@@ -14,9 +14,13 @@ INCLUDES += -IG:\libraries\avr8\avr8-gnu-toolchain\avr\include
 INCLUDES += -IG:\libraries\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include
 
 # Define the linker flags
-LDFLAGS := -L/usr/local/avr/lib -lavr-libc
+# LDFLAGS := -L/usr/local/avr/lib -lavr-libc
 
 # OS dependend RM Command
+# For now i don't get, why the hell the rm command is not
+# working in windows. Maybe it's related to the execution
+# prevention or something similar.
+# So i keep cleaning manual when working under M$ garbage OS...
 ifeq ($(OS),Windows_NT)
 RM = rm 
 else

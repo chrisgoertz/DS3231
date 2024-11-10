@@ -67,7 +67,9 @@
 #define	DS3231_ALARM2_HOURS								(0x0C)
 #define	DS3231_ALARM2_DAY								(0x0D)
 #define	DS3231_ALARM2_DATE								(0x0E)
+// Control Register Address
 #define	DS3231_CONTROL									(0x0F)
+// Status Register Address
 #define	DS3231_STATUS									(0x10)
 #define	DS3231_AGING_OFFSET								(0x11)
 #define	DS3231_TEMP_MSB									(0x12)
