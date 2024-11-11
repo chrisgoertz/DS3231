@@ -17,6 +17,9 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#ifdef __cplusplus
+extern "C"{
+#endif
 #define DS3231_ADDR										(0x68)
 
 
@@ -102,4 +105,7 @@ bool rtc3231_isBusy();
 //void rtc3231_armAlarm1(bool enable);
 //void rtc3231_armAlarm2(bool enable);
 //uint16_t rtc3231_getTemperature();
+#ifdef __cplusplus
+}
+#endif
 #endif
