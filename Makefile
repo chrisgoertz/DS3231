@@ -7,11 +7,12 @@ SRC_FILES = $(wildcard *.c)
 OBJ_FILES = $(patsubst %.c, %.o, $(SRC_FILES))
 
 # Define the compiler and flags
-CC = G:\libraries\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe
+CC = /usr/bin/avr-gcc
 CFLAGS = -O2 -Wall -mmcu=atmega1284p
-INCLUDES := -IG:\libraries\AVR\i2c_avr-master
-INCLUDES += -IG:\libraries\avr8\avr8-gnu-toolchain\avr\include
-INCLUDES += -IG:\libraries\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include
+INCLUDES += /usr/lib/avr/include
+
+INCLUDES += /home/chris/coding/c/lib/i2c_avr
+
 
 # Define the linker flags
 # LDFLAGS := -L/usr/local/avr/lib -lavr-libc
@@ -29,7 +30,7 @@ endif
 
 # Rule to compile source files
 $(OBJ_FILES): %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $<
+	$(CC) $(CFLAGS) $(addprefix -I,$(INCLUDES)) -c $<
 
 # Rule to create the library
 lib$(LIB_NAME).a: $(OBJ_FILES)
